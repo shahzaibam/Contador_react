@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
 
   const [likes, setLikes] = useState(0)
+  const [comment, setComment] = useState("")
+
+  useEffect(() => {
+    console.log("doing")
+    document.title = `Likes are ${likes}`
+  }, [likes])
 
   return (
     <div>
@@ -13,8 +19,10 @@ function App() {
 
       <button onClick={() => setLikes(likes + 1)}>Like</button>
 
-      <button onClick={() => setLikes(likes - 1)}>Dislike</button>
+      <button onClick={() => setLikes(likes === 0 ? likes : likes - 1)}>Dislike</button>
     
+      <p>{comment}</p>
+      <input onChange={chn => setComment(chn.target.value)} value={comment} />
       </div>
   );
 }
